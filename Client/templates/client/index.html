@@ -1,0 +1,63 @@
+{% extends "client/base.html" %}
+{% block body %}
+<br/>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+           <form  method='GET'>
+             <input type="search" name="Client_Name">
+             <button class="btn-info" type="submit">Search</button>
+           </form>
+        </div> 
+      </div>
+    </div>      
+        <br/>
+
+<div class="row">
+    <div class="col-md-6 offset-md-5">
+        <a href="{% url 'Client:create_form' %}" class="btn btn-primary">NEW JOBSHEET</a>
+    </div>
+</div>
+<br/>
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="table-primary">
+            <th>S.No</th>
+            <th>Client Name</th>
+            <th>Contact Info</th>
+            <th>Received Date</th>
+            <th>Inventory Received</th>
+            <th>Reported Issues</th>
+            <th>Client Notes</th>
+            <th>Assigned Technician</th>
+            <th>Estimated Amount</th>
+            <th>Deadline</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client_ in clients %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ client_.Client_Name }}</td>
+            <td>{{ client_.Contact_Info }}</td>
+            <td>{{ client_.Recieved_Date }}</td>
+            <td>{{ client_.Inventory_Recieved }}</td>
+            <td>{{ client_.Reported_Issues }}</td>
+            <td>{{ client_.Client_Notes }}</td>
+            <td>{{ client_.Assigned_Technician }}</td>
+            <td>{{ client_.Estimated_Amount }}</td>
+            <td>{{ client_.Deadline }}</td>
+            <td>{{ client_.Status }}</td>
+            <td>
+                <a href="{% url 'Client:view_form' client_.id %}" class="btn btn-info">View</a>
+                <a href="{% url 'Client:update_form' client_.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'Client:delete_form' client_.id %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

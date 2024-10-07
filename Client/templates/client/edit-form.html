@@ -1,0 +1,82 @@
+{% extends "client/base.html" %}
+{% block body %}
+<br/>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-white bg-info">
+          <h4 class="card-title">CREATE NEW JOBSHEET</h4>
+        </div>
+        
+        <div class="card-body" style="height: 500px; overflow-y: auto;"> 
+        
+          <form action="{% url 'Client:update_form' client_.id %}" method="POST">
+            {% csrf_token %}
+          
+            <div class="mb-3">
+              <label for="Client_Name" class="form-label">Client Name:</label>
+              <input type="text" value="{{client_.Client_Name}}" class="form-control" id="Client_Name" placeholder="Enter name" name="Client_Name">
+            </div>
+
+            <div class="mb-3">
+              <label for="Contact_Info" class="form-label">Contact Info:</label>
+              <input type="number" value="{{client_.Contact_Info}}" class="form-control" id="Contact_Info" placeholder="Enter number" name="Contact_Info">
+            </div>
+
+            <div class="mb-3">
+              <label for="Recieved_Date" class="form-label">Received Date:</label>
+              <input type="date" value="{{client_.Recieved_Date|date:'Y-m-d'}}" class="form-control" id="Recieved_Date" name="Recieved_Date">
+            </div>
+
+            <div class="mb-3">
+              <label for="Inventory_Recieved" class="form-label">Inventory Received:</label>
+              <input type="text" value="{{client_.Inventory_Recieved}}" class="form-control" id="Inventory_Recieved" placeholder="Enter inventory name" name="Inventory_Recieved">
+            </div>
+
+            <div class="mb-3">
+              <label for="Reported_Issues" class="form-label">Reported Issues:</label>
+              <textarea class="form-control"  id="Reported_Issues" placeholder="Describe issues" name="Reported_Issues">{{client_.Reported_Issues}}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="Client_Notes" class="form-label">Client Notes:</label>
+              <textarea class="form-control"  id="Client_Notes" placeholder="Client notes" name="Client_Notes">{{client_.Client_Notes}}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="Assigned_Technician" class="form-label">Assigned Technician:</label>
+              <input type="text" class="form-control" value="{{client_.Assigned_Technician}}" id="Assigned_Technician" placeholder="Technician name" name="Assigned_Technician">
+            </div>
+
+            <div class="mb-3">
+              <label for="Estimated_Amount" class="form-label">Estimated Amount:</label>
+              <input type="number" value="{{client_.Estimated_Amount}}" class="form-control" id="Estimated_Amount" placeholder="Enter amount" name="Estimated_Amount">
+            </div>
+
+            <div class="mb-3">
+              <label for="Deadline" class="form-label">Deadline:</label>
+              <input type="date" value="{{client_.Deadline|date:'Y-m-d'}}" class="form-control" id="Deadline" name="Deadline">
+            </div>
+
+            <div class="mb-3">
+              <label for="Status" class="form-label">Status:</label>
+              <select class="form-control" id="Status" name="Status">
+                <option value="Pending" {% if client_.Status == "Pending" %} SELECTED {% endif %}>Pending</option>
+                <option value="In Progress" {% if client_.Status == "In Progress" %} SELECTED {% endif %}>In Progress</option>
+                <option value="Completed" {% if client_.Status == "Completed" %} SELECTED {% endif %}>Completed</option>
+              </select>
+            </div>
+            <div >
+              <button type="submit" class="btn btn-dark w-100">Update</button>
+            </div>  
+          </form>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

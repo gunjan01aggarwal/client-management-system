@@ -1,0 +1,86 @@
+{% extends "client/base.html" %}
+{% block body %}
+</br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-white bg-info">
+                    <h4 class="card-title">VIEW JOBSHEET</h4>
+                </div>
+            
+                <div class="card-body"> 
+                
+                    <form action="{% url 'Client:generate_pdf' client_.id %}" method="POST">
+                    {% csrf_token %}
+
+
+
+                    <div class="container">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="bg-primary">Client Name:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Client_Name}}</td>
+                
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Contact Info:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Contact_Info}}</td>
+                
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Recieved Date:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Recieved_Date}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="bg-primary">Inventory Recieved:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Inventory_Recieved}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Reported Issues:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Reported_Issues}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Client Notes:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Client_Notes}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Assigned Technician:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Assigned_Technician}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Estimated Amount:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Estimated_Amount}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Deadline:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Deadline}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-primary">Status:</td>
+                                    <td class="p-3 mb-2 bg-light text-dark">{{client_.Status}}</td>
+                                </tr>                                
+                            </tbody>
+                        </table>
+                        <div class="mb-3">
+                            <label for="Add" class="form-label">Add or Update Note:</label>
+                            <textarea class="form-control"   placeholder="Add" name="Add"></textarea>
+                        </div>
+                        <div>
+                            <button type="Submit" class="btn btn-info w-100">Save Note</button>
+                        </div>
+                        </br>
+                        <a href="{% url 'Client:generate_pdf' client_.id %}" class="btn btn-info">Save as pdf</a>
+
+                    </div>
+                    </form>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
